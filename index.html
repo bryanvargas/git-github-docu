@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & GitHub Cheat Sheet — Team Professional Edition</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<base target="_blank">
+    </head>
+    <body>
+        <!-- HEADER (Full Width, Outside Container) -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="header-icon">🚀</div>
+                    <h1>Git & GitHub<br><span class="header-subtitle">Cheat Sheet</span></h1>
+                </div>
+                <div class="header-right">
+                
+                <!-- Apple-style Tabs -->
+                <div class="header-tabs">
+                    <button class="tab-btn active" data-tab="all">Todo</button>
+                    <button class="tab-btn" data-tab="basic">Básicos</button>
+                    <button class="tab-btn" data-tab="remote">Remotos</button>
+                    <button class="tab-btn" data-tab="branch">Ramas</button>
+                    <button class="tab-btn" data-tab="advanced">Avanzado</button>
+                    <button class="tab-btn" data-tab="workflow">Workflow</button>
+                </div>
+
+                <!-- Quick Search -->
+                <div class="header-search">
+                    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar comandos...">
+                    <kbd class="search-kbd">⌘K</kbd>
+                    </div>
+                </div>
+
+                <div class="badge-container">
+                    <span class="badge badge-pro">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        PRO
+                    </span>
+                    <span class="badge badge-team">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        TEAM
+                    </span>
+                    <span class="badge badge-daily">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        DAILY
+                    </span>
+                </div>
+            </div>
+        </header>
+
+    <div class="container">
+
+        <!-- QUICK NAV -->
+        <nav class="quick-nav" id="quickNav">
+            <a href="#basics" class="nav-item" data-section="basics">
+                <span class="nav-icon">🟢</span>
+                <span>Básicos</span>
+            </a>
+            <a href="#remote" class="nav-item" data-section="remote">
+                <span class="nav-icon">🌐</span>
+                <span>Remotos</span>
+            </a>
+            <a href="#branches" class="nav-item" data-section="branches">
+                <span class="nav-icon">🌳</span>
+                <span>Ramas</span>
+            </a>
+            <a href="#advanced" class="nav-item" data-section="advanced">
+                <span class="nav-icon">⚡</span>
+                <span>Avanzados</span>
+            </a>
+            <a href="#stash" class="nav-item" data-section="stash">
+                <span class="nav-icon">📦</span>
+                <span>Stash</span>
+            </a>
+            <a href="#emergency" class="nav-item" data-section="emergency">
+                <span class="nav-icon">🆘</span>
+                <span>Emergencia</span>
+            </a>
+            <a href="#workflow" class="nav-item" data-section="workflow">
+                <span class="nav-icon">💼</span>
+                <span>Workflow</span>
+            </a>
+            <a href="#aliases" class="nav-item" data-section="aliases">
+                <span class="nav-icon">🔧</span>
+                <span>Aliases</span>
+            </a>
+            <a href="#tips" class="nav-item" data-section="tips">
+                <span class="nav-icon">💡</span>
+                <span>Tips</span>
+            </a>
+        </nav>
+
+        <!-- PROGRESS BAR -->
+        <div class="reading-progress">
+            <div class="reading-progress-bar" id="readingProgress"></div>
+        </div>
+
+        <!-- SECCIÓN BÁSICOS -->
+        <section class="section" id="basics" data-category="basic">
+            <div class="section-header">
+                <div class="section-icon-wrapper category-basic">
+                    <span class="section-icon">🟢</span>
+                </div>
+                <div class="section-title-group">
+                    <h2 class="section-title">Comandos Básicos</h2>
+                    <span class="section-count">9 comandos</span>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Comando</th><th>Función</th><th class="th-usage">Uso Diario</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code class="command">git init</code></td><td>Inicializa un repositorio</td><td><span class="usage-tag">1-2 veces</span></td></tr>
+                        <tr><td><code class="command">git clone &lt;url&gt;</code></td><td>Clona un repo remoto</td><td><span class="usage-tag">Al iniciar</span></td></tr>
+                        <tr><td><code class="command">git status</code></td><td>Muestra cambios pendientes</td><td><span class="usage-tag usage-high">⭐ Múltiples veces</span></td></tr>
+                        <tr><td><code class="command">git add .</code></td><td>Añade TODOS los archivos</td><td><span class="usage-tag usage-high">⭐ Diario</span></td></tr>
+                        <tr><td><code class="command">git add -p</code></td><td>Añade por fragmentos (hunks)</td><td><span class="usage-tag usage-med">⭐ Profesional</span></td></tr>
+                        <tr><td><code class="command">git commit -m "msg"</code></td><td>Crea un commit</td><td><span class="usage-tag usage-high">⭐ Múltiples veces</span></td></tr>
+                        <tr><td><code class="command">git commit --amend</code></td><td>Modifica el último commit</td><td><span class="usage-tag usage-med">⭐ Correcciones</span></td></tr>
+                        <tr><td><code class="command">git log --oneline --graph</code></td><td>Historial visual</td><td><span class="usage-tag usage-high">⭐ Ver historia</span></td></tr>
+                        <tr><td><code class="command">git log -p</code></td><td>Historial con cambios detallados</td><td><span class="usage-tag">Debugging</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN REMOTOS -->
+        <section class="section" id="remote" data-category="remote">
+            <div class="section-header">
+                <div class="section-icon-wrapper category-remote">
+                    <span class="section-icon">🌐</span>
+                </div>
+                <div class="section-title-group">
+                    <h2 class="section-title">Comandos Remotos</h2>
+                    <span class="section-count">6 comandos</span>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Comando</th><th>Función</th><th class="th-usage">Importancia</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code class="command">git push origin main</code></td><td>Subir cambios al remoto</td><td><span class="usage-tag usage-high">⭐ Diario</span></td></tr>
+                        <tr><td><code class="command">git push -u origin feature/nombre</code></td><td>Sube y configura tracking</td><td><span class="usage-tag usage-high">⭐ Al crear rama</span></td></tr>
+                        <tr><td><code class="command">git push --force-with-lease</code></td><td>Forzar push seguro</td><td><span class="usage-tag usage-med">⭐ Solo si sabes</span></td></tr>
+                        <tr><td><code class="command">git pull --rebase</code></td><td>Trae cambios y rebasa</td><td><span class="usage-tag usage-high">⭐ TU MEJOR AMIGO</span></td></tr>
+                        <tr><td><code class="command">git fetch --prune</code></td><td>Descarga y limpia ramas</td><td><span class="usage-tag usage-med">⭐ Mantenimiento</span></td></tr>
+                        <tr><td><code class="command">git remote -v</code></td><td>Ver repositorios remotos</td><td><span class="usage-tag">Configuración</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN RAMAS -->
+        <section class="section" id="branches" data-category="branch">
+            <div class="section-header">
+                <div class="section-icon-wrapper category-branch">
+                    <span class="section-icon">🌳</span>
+                </div>
+                <div class="section-title-group">
+                    <h2 class="section-title">Ramas & Workflow</h2>
+                    <span class="section-count">6 comandos</span>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Comando</th><th>Función</th><th class="th-usage">Uso</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code class="command">git branch -d &lt;nombre&gt;</code></td><td>Eliminar rama (seguro)</td><td><span class="usage-tag usage-med">⭐ Post-merge</span></td></tr>
+                        <tr><td><code class="command">git checkout -b feature/login</code></td><td>Crear y cambiar a nueva rama</td><td><span class="usage-tag usage-high">⭐ SIEMPRE</span></td></tr>
+                        <tr><td><code class="command">git switch -c feature/login</code></td><td>Nuevo comando (Git 2.23+)</td><td><span class="usage-tag usage-med">⭐ Alternativa moderna</span></td></tr>
+                        <tr><td><code class="command">git merge --no-ff feature/login</code></td><td>Merge sin fast-forward</td><td><span class="usage-tag usage-med">⭐ Preserva historia</span></td></tr>
+                        <tr><td><code class="command">git rebase -i HEAD~3</code></td><td>Rebase interactivo</td><td><span class="usage-tag usage-high">⭐ SQUASH y CLEANUP</span></td></tr>
+                        <tr><td><code class="command">git cherry-pick &lt;commit&gt;</code></td><td>Traer commit específico</td><td><span class="usage-tag usage-med">⭐ Hotfix urgente</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN AVANZADOS -->
+        <section class="section" id="advanced" data-category="advanced">
+            <div class="section-header">
+                <div class="section-icon-wrapper category-advanced">
+                    <span class="section-icon">⚡</span>
+                </div>
+                <div class="section-title-group">
+                    <h2 class="section-title">Avanzados</h2>
+                    <span class="section-count">7 comandos</span>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Comando</th><th>Función</th><th class="th-usage">Frecuencia</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code class="command">git reset --soft HEAD~1</code></td><td>Deshacer commit manteniendo cambios</td><td><span class="usage-tag usage-high">⭐ CORRECCIÓN RÁPIDA</span></td></tr>
+                        <tr><td><code class="command">git restore &lt;archivo&gt;</code></td><td>Descartar cambios no commiteados</td><td><span class="usage-tag usage-high">⭐ DESHACER ERRORES</span></td></tr>
+                        <tr><td><code class="command">git reflog</code></td><td>Ver TODO lo que has hecho</td><td><span class="usage-tag usage-high">⭐ SALVAVIDAS</span></td></tr>
+                        <tr><td><code class="command">git bisect start</code></td><td>Encontrar qué commit rompió algo</td><td><span class="usage-tag">Debugging avanzado</span></td></tr>
+                        <tr><td><code class="command">git grep "texto"</code></td><td>Buscar texto en el historial</td><td><span class="usage-tag usage-med">⭐ Búsqueda</span></td></tr>
+                        <tr><td><code class="command">git blame &lt;archivo&gt;</code></td><td>Saber quién cambió cada línea</td><td><span class="usage-tag usage-high">⭐ DEDOS SEÑALADORES</span></td></tr>
+                        <tr><td><code class="command">git tag -a v1.0.0 -m "msg"</code></td><td>Crear tag anotado</td><td><span class="usage-tag">Releases</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN STASH -->
+        <section class="section" id="stash" data-category="stash">
+            <div class="section-header">
+                <div class="section-icon-wrapper category-stash">
+                    <span class="section-icon">📦</span>
+                </div>
+                <div class="section-title-group">
+                    <h2 class="section-title">Git Stash</h2>
+                    <span class="section-count">9 comandos</span>
+                </div>
+            </div>
+            <div class="table-wrapper table-stash">
+                <table>
+                    <thead>
+                        <tr><th>Comando</th><th>Función</th><th class="th-usage">Uso Diario</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row-highlight"><td><code class="command command-stash">git stash</code></td><td>Guarda trabajo temporal sin commitear</td><td><span class="usage-tag usage-high">⭐ Cambio de rama urgente</span></td></tr>
+                        <tr class="row-highlight"><td><code class="command command-stash">git stash pop</code></td><td>Recupera el último stash y lo elimina</td><td><span class="usage-tag usage-high">⭐ Volver al trabajo</span></td></tr>
+                        <tr><td><code class="command command-stash">git stash save "desc"</code></td><td>Guarda stash con nombre/mensaje</td><td><span class="usage-tag usage-med">⭐ Organización</span></td></tr>
+                        <tr><td><code class="command command-stash">git stash list</code></td><td>Ver todos los stashes guardados</td><td><span class="usage-tag usage-med">⭐ Saber qué tienes</span></td></tr>
+                        <tr><td><code class="command command-stash">git stash apply stash@{1}</code></td><td>Aplica un stash específico SIN borrarlo</td><td><span class="usage-tag usage-med">⭐ Recuperar sin perder</span></td></tr>
+                        <tr><td><code class="command command-stash">git stash drop stash@{1}</code></td><td>Borra un stash específico</td><td><span class="usage-tag">Limpieza</span></td></tr>
+                        <tr><td><code class="command command-stash">git stash clear</code></td><td>Borra TODOS los stashes</td><td><span class="usage-tag usage-danger">⚠️ Usar con cuidado</span></td></tr>
+                        <tr><td><code class="command command-stash">git stash show stash@{0}</code></td><td>Ver qué archivos hay en un stash</td><td><span class="usage-tag">Revisar antes</span></td></tr>
+                        <tr><td><code class="command command-stash">git stash branch rama stash@{0}</code></td><td>Crear rama desde un stash</td><td><span class="usage-tag usage-med">⭐ Avanzado</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECCIÓN EMERGENCIA -->
+        <section class="section" id="emergency" data-category="emergency">
+            <div class="section-header">
+                <div class="section-icon-wrapper category-emergency">
+                    <span class="section-icon">🆘</span>
+                </div>
+                <div class="section-title-group">
+                    <h2 class="section-title">Comandos de Emergencia</h2>
+                    <span class="section-count">7 comandos</span>
+                </div>
+            </div>
+            <div class="table-wrapper table-emergency">
+                <table>
+                    <thead>
+                        <tr><th>Comando</th><th>Problema</th><th class="th-usage">Solución</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row-priority-high"><td><code class="command command-emergency">git reflog</code></td><td>"Perdí un commit con reset hard"</td><td><span class="usage-tag usage-high">Encuentra el hash y haz reset</span></td></tr>
+                        <tr class="row-priority-high"><td><code class="command command-emergency">git reset --hard ORIG_HEAD</code></td><td>"Me equivoqué al hacer merge"</td><td><span class="usage-tag usage-high">Deshace la última operación</span></td></tr>
+                        <tr class="row-priority-med"><td><code class="command command-emergency">git clean -fd</code></td><td>"Archivos sin trackear que no quiero"</td><td><span class="usage-tag usage-med">Elimina archivos y carpetas</span></td></tr>
+                        <tr class="row-priority-med"><td><code class="command command-emergency">git diff --staged</code></td><td>"¿Qué voy a commitear?"</td><td><span class="usage-tag usage-med">Ver cambios en staging</span></td></tr>
+                        <tr class="row-priority-high"><td><code class="command command-emergency">git checkout -- .</code></td><td>"Quiero descartar TODOS mis cambios"</td><td><span class="usage-tag usage-high">Revertir TODO al último commit</span></td></tr>
+                        <tr class="row-priority-high"><td><code class="command command-emergency">git fetch origin && git reset --hard origin/main</code></td><td>"Mi repo está completamente roto"</td><td><span class="usage-tag usage-high">FORZA sincronización</span></td></tr>
+                        <tr class="row-priority-high"><td><code class="command command-emergency">git stash drop stash@{0}</code></td><td>"Apliqué mal un stash y lo perdí"</td><td><span class="usage-tag usage-high">Revisa reflog del stash</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- WORKFLOW PROFESIONAL -->
+        <section class="section" id="workflow" data-category="workflow">
+            <div class="section-header">
+                <div class="section-icon-wrapper category-workflow">
+                    <span class="section-icon">💼</span>
+                </div>
+                <div class="section-title-group">
+                    <h2 class="section-title">Flujo de Trabajo Profesional</h2>
+                    <span class="section-count">3 pasos</span>
+                </div>
+            </div>
+            <div class="workflow-cards">
+                <div class="workflow-card">
+                    <div class="workflow-card-header">
+                        <div class="workflow-number">01</div>
+                        <div class="workflow-phase">Crear rama de feature</div>
+                    </div>
+                    <div class="workflow-body">
+                        <code class="command">git checkout -b feature/ticket-123</code>
+                        <div class="workflow-divider"></div>
+                        <div class="workflow-number">02</div>
+                        <div class="workflow-phase">Trabajar y commitear</div>
+                        <code class="command">git add -p && git commit -m "feat: desc"</code>
+                    </div>
+                    <div class="workflow-footer">
+                        <span class="workflow-rule">🎯 Un commit por cambio lógico</span>
+                    </div>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-card-header">
+                        <div class="workflow-number">03</div>
+                        <div class="workflow-phase">Mantener al día con main</div>
+                    </div>
+                    <div class="workflow-body">
+                        <code class="command">git pull --rebase origin main</code>
+                        <div class="workflow-divider"></div>
+                        <div class="workflow-number">04</div>
+                        <div class="workflow-phase">Subir y crear PR</div>
+                        <code class="command">git push -u origin feature/ticket-123</code>
+                    </div>
+                    <div class="workflow-footer">
+                        <span class="workflow-rule">✨ Crear Pull Request en GitHub</span>
+                    </div>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-card-header">
+                        <div class="workflow-number">05</div>
+                        <div class="workflow-phase">Después del merge</div>
+                    </div>
+                    <div class="workflow-body workflow-body-stack">
+                        <code class="command">git checkout main</code>
+                        <code class="command">git pull --rebase</code>
+                        <code class="command">git branch -d feature/ticket-123</code>
+                        <code class="command">git push origin --delete feature/ticket-123</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ALIASES -->
+        <section class="section" id="aliases" data-category="practices">
+            <div class="section-header">
+                <div class="section-icon-wrapper category-practices">
+                    <span class="section-icon">🔧</span>
+                </div>
+                <div class="section-title-group">
+                    <h2 class="section-title">Aliases que Aceleran tu Día</h2>
+                    <span class="section-count">8 aliases</span>
+                </div>
+            </div>
+            <div class="aliases-grid">
+                <div class="alias-card">
+                    <div class="alias-header">
+                        <code class="alias-name">git tree</code>
+                        <span class="alias-desc">Árbol visual de commits</span>
+                    </div>
+                    <div class="alias-command-box">
+                        <button class="copy-btn" data-cmd='git config --global alias.tree "log --oneline --graph --all"'>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        </button>
+                        <code class="alias-command">git config --global alias.tree "log --oneline --graph --all"</code>
+                    </div>
+                </div>
+                <div class="alias-card">
+                    <div class="alias-header">
+                        <code class="alias-name">git unstage</code>
+                        <span class="alias-desc">Sacar TODO del staging</span>
+                    </div>
+                    <div class="alias-command-box">
+                        <button class="copy-btn" data-cmd='git config --global alias.unstage "restore --staged ."'>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        </button>
+                        <code class="alias-command">git config --global alias.unstage "restore --staged ."</code>
+                    </div>
+                </div>
+                <div class="alias-card">
+                    <div class="alias-header">
+                        <code class="alias-name">git last</code>
+                        <span class="alias-desc">Ver último commit</span>
+                    </div>
+                    <div class="alias-command-box">
+                        <button class="copy-btn" data-cmd='git config --global alias.last "log -1 HEAD"'>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        </button>
+                        <code class="alias-command">git config --global alias.last "log -1 HEAD"</code>
+                    </div>
+                </div>
+                <div class="alias-card">
+                    <div class="alias-header">
+                        <code class="alias-name">git undo</code>
+                        <span class="alias-desc">Deshacer último commit</span>
+                    </div>
+                    <div class="alias-command-box">
+                        <button class="copy-btn" data-cmd='git config --global alias.undo "reset --soft HEAD~1"'>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        </button>
+                        <code class="alias-command">git config --global alias.undo "reset --soft HEAD~1"</code>
+                    </div>
+                </div>
+                <div class="alias-card">
+                    <div class="alias-header">
+                        <code class="alias-name">git co</code>
+                        <span class="alias-desc">Alias para checkout</span>
+                    </div>
+                    <div class="alias-command-box">
+                        <button class="copy-btn" data-cmd='git config --global alias.co checkout'>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        </button>
+                        <code class="alias-command">git config --global alias.co checkout</code>
+                    </div>
+                </div>
+                <div class="alias-card">
+                    <div class="alias-header">
+                        <code class="alias-name">git cb</code>
+                        <span class="alias-desc">Crear y cambiar a rama</span>
+                    </div>
+                    <div class="alias-command-box">
+                        <button class="copy-btn" data-cmd='git config --global alias.cb "checkout -b"'>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        </button>
+                        <code class="alias-command">git config --global alias.cb "checkout -b"</code>
+                    </div>
+                </div>
+                <div class="alias-card">
+                    <div class="alias-header">
+                        <code class="alias-name">git st</code>
+                        <span class="alias-desc">Status corto</span>
+                    </div>
+                    <div class="alias-command-box">
+                        <button class="copy-btn" data-cmd='git config --global alias.st "status -sb"'>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        </button>
+                        <code class="alias-command">git config --global alias.st "status -sb"</code>
+                    </div>
+                </div>
+                <div class="alias-card">
+                    <div class="alias-header">
+                        <code class="alias-name">git stash-list</code>
+                        <span class="alias-desc">Ver stashes con nombres</span>
+                    </div>
+                    <div class="alias-command-box">
+                        <button class="copy-btn" data-cmd='git config --global alias.stash-list "stash list --pretty=oneline"'>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        </button>
+                        <code class="alias-command">git config --global alias.stash-list "stash list --pretty=oneline"</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TIPS -->
+        <section class="section" id="tips" data-category="practices">
+            <div class="section-header">
+                <div class="section-icon-wrapper category-practices">
+                    <span class="section-icon">💡</span>
+                </div>
+                <div class="section-title-group">
+                    <h2 class="section-title">Pro Tips del Día a Día</h2>
+                    <span class="section-count">6 consejos</span>
+                </div>
+            </div>
+            <div class="tips-container">
+                <div class="tip-card">
+                    <div class="tip-card-header">
+                        <div class="tip-icon-bg">
+                            <span class="tip-icon">🎯</span>
+                        </div>
+                        <h3 class="tip-title">Regla de oro del commit</h3>
+                    </div>
+                    <p class="tip-text">Título ≤50 caracteres, imperativo presente, específico: <em>"Fix NPE in UserService"</em> NO <em>"Fixed bug"</em></p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-card-header">
+                        <div class="tip-icon-bg">
+                            <span class="tip-icon">🔄</span>
+                        </div>
+                        <h3 class="tip-title">Antes de push</h3>
+                    </div>
+                    <p class="tip-text">Siempre haz <code class="command-inline">git pull --rebase</code> para evitar merges innecesarios y mantener historia limpia</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-card-header">
+                        <div class="tip-icon-bg">
+                            <span class="tip-icon">🆘</span>
+                        </div>
+                        <h3 class="tip-title">Si todo falla</h3>
+                    </div>
+                    <p class="tip-text"><code class="command-inline">git reflog</code> es tu mejor amigo. Siempre puedes volver atrás desde ahí</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-card-header">
+                        <div class="tip-icon-bg">
+                            <span class="tip-icon">📦</span>
+                        </div>
+                        <h3 class="tip-title">Stash profesional</h3>
+                    </div>
+                    <p class="tip-text">Siempre usa <code class="command-inline">git stash save "descripción"</code> para identificar qué guardaste</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-card-header">
+                        <div class="tip-icon-bg">
+                            <span class="tip-icon">🚀</span>
+                        </div>
+                        <h3 class="tip-title">Pull Request exitoso</h3>
+                    </div>
+                    <p class="tip-text">Antes de crear PR: rebase interactivo para limpiar commits + <code class="command-inline">git push --force-with-lease</code></p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-card-header">
+                        <div class="tip-icon-bg">
+                            <span class="tip-icon">⚡</span>
+                        </div>
+                        <h3 class="tip-title">Stash + rebase</h3>
+                    </div>
+                    <p class="tip-text"><code class="command-inline">git stash</code> → <code class="command-inline">git pull --rebase</code> → <code class="command-inline">git stash pop</code> = Flujo perfecto</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- STASH QUICK REF -->
+        <div class="stash-quick-ref">
+            <div class="stash-quick-header">
+                <span class="stash-quick-icon">📦</span>
+                <span class="stash-quick-title">Stash — Referencia Rápida</span>
+            </div>
+            <div class="stash-quick-grid">
+                <div class="stash-quick-item"><code>git stash</code><span>Guarda cambios</span></div>
+                <div class="stash-quick-item"><code>git stash pop</code><span>Recupera y elimina</span></div>
+                <div class="stash-quick-item"><code>git stash save "nombre"</code><span>Guarda con nombre</span></div>
+                <div class="stash-quick-item"><code>git stash list</code><span>Ver stashes</span></div>
+                <div class="stash-quick-item"><code>git stash apply stash@{1}</code><span>Aplica sin borrar</span></div>
+                <div class="stash-quick-item"><code>git stash drop stash@{1}</code><span>Borra stash</span></div>
+                <div class="stash-quick-item"><code>git stash clear</code><span>Borra todos</span></div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-badges">
+                    <span class="footer-badge">⭐ = Más usado</span>
+                    <span class="footer-badge">⭐⭐⭐ = Te salvará la vida</span>
+                </div>
+                <p class="footer-text">Versión Team Professional • Guarda esta hoja • Comparte con el equipo</p>
+                <p class="footer-quote">"git reflog" y "git stash" — Ctrl+C, Ctrl+V en tu memoria muscular</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="toastMsg">Copiado al portapapeles</span>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
