@@ -211,7 +211,12 @@ body::before {
         0 0 0 0.5px rgba(0,0,0,0.04),
         0 4px 20px rgba(0,0,0,0.04),
         0 1px 3px rgba(0,0,0,0.02);
-    transition: box-shadow 0.3s ease, background 0.3s ease, padding 0.3s ease;
+    transition: padding 0.3s ease;
+}
+
+.header.scrolled {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .header.scrolled {
@@ -390,6 +395,18 @@ body::before {
     align-items: center;
     gap: 32px;
     transition: opacity 0.3s ease, transform 0.3s ease, height 0.3s ease;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    transition: gap 0.3s ease, opacity 0.3s ease;
+}
+
+.header:not(.scrolled) .header-left {
+    display: none !important;
 }
 
 .header-left {

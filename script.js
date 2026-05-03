@@ -284,22 +284,33 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* ---- Header Scroll Effect ---- */
+let ticking = false;
+let lastScrollY = 0;
+let headerState = 'normal'; // 'normal' or 'scrolled'
+
 function initHeaderScroll() {
     const header = document.querySelector('.header');
     if (!header) return;
 
-    let ticking = false;
-
     function updateHeader() {
         const scrollY = window.scrollY || document.documentElement.scrollTop;
         
-        // Add scrolled class after scrolling down 50px (less delay)
-        if (scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        // Only update if scroll position changed significantly
+        if (Math.abs(scrollY - lastScrollY) < 5) {
+            ticking = false;
+            return;
         }
         
+        // Update header state
+        if (scrollY > 50 && headerState === 'normal') {
+            header.classList.add('scrolled');
+            headerState = 'scrolled';
+        } else if (scrollY <= 50 && headerState === 'scrolled') {
+            header.classList.remove('scrolled');
+            headerState = 'normal';
+        }
+        
+        lastScrollY = scrollY;
         ticking = false;
     }
 
@@ -356,14 +367,14 @@ function initSearch() {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
             const query = searchInput.value.toLowerCase().trim();
+            let firstMatchElement = null;
 
             // Reset to show all if search is empty
             if (!query) {
                 document.querySelectorAll('.section').forEach(section => {
                     section.style.display = '';
                     section.style.opacity = '1';
-                    // Reset all rows and cards
-                    section.querySelectorAll('tr, .tip-card, .workflow-card, .alias-card').forEach(el => {
+                    section.querySelectorAll('tr, .tip-card, .workflow-card, .alias-card, .stash-quick-item').forEach(el => {
                         el.style.display = '';
                     });
                 });
@@ -378,28 +389,46 @@ function initSearch() {
                 btn.classList.toggle('active', btn.dataset.tab === 'all');
             });
 
-            // Search through commands and descriptions
+            // Search through all sections
             document.querySelectorAll('.section').forEach(section => {
-                let hasMatch = false;
+                let sectionHasMatch = false;
 
-                // Check all searchable elements
+                // Check all searchable elements in this section
                 const searchableElements = section.querySelectorAll('tr, .tip-card, .workflow-card, .alias-card, .stash-quick-item');
                 
                 searchableElements.forEach(el => {
                     const text = el.textContent.toLowerCase();
                     if (text.includes(query)) {
                         el.style.display = '';
-                        hasMatch = true;
+                        sectionHasMatch = true;
+                        // Capture first visible match
+                        if (!firstMatchElement && el.offsetParent !== null) {
+                            firstMatchElement = el;
+                        }
                     } else {
                         el.style.display = 'none';
                     }
                 });
 
-                // Show/hide section based on matches
-                section.style.display = hasMatch ? '' : 'none';
-                section.style.opacity = '1';
+                // Show/hide section based on whether it has any matches
+                if (sectionHasMatch) {
+                    section.style.display = '';
+                    section.style.opacity = '1';
+                } else {
+                    section.style.display = 'none';
+                }
             });
-        }, 200);
+
+            // Scroll to first match
+            if (firstMatchElement) {
+                setTimeout(() => {
+                    firstMatchElement.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }, 150);
+            }
+        }, 150);
     });
 }
 
