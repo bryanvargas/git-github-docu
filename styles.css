@@ -2174,3 +2174,227 @@ tr:hover td {
     background: rgba(11, 124, 107, 0.2);
     color: var(--text-primary);
 }
+
+/* ============================================
+   RESPONSIVE DESIGN (Apple-like)
+   ============================================ */
+@media (max-width: 1024px) {
+    body {
+        font-size: 19px;
+    }
+    
+    .container {
+        padding: 50px 30px 60px;
+    }
+    
+    .header {
+        padding: 15px 30px;
+    }
+    
+    .header-content {
+        gap: 20px;
+    }
+    
+    .header-left h1 {
+        font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 18px;
+        line-height: 1.7;
+    }
+    
+    .container {
+        padding: 40px 20px 60px;
+    }
+    
+    .header {
+        padding: 12px 20px;
+    }
+    
+    .header-content {
+        flex-direction: row;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .header-left {
+        display: none !important;
+    }
+    
+    .header-logo-only {
+        display: flex !important;
+    }
+    
+    .header.scrolled .header-left {
+        display: flex !important;
+    }
+    
+    .header.scrolled .header-logo-only {
+        display: none !important;
+    }
+    
+    .header-right {
+        flex-direction: row;
+        gap: 10px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    
+    .header-tabs {
+        order: 2;
+        width: 100%;
+        overflow-x: auto;
+        padding: 4px;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    
+    .header-tabs::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .header-search {
+        order: 1;
+        max-width: 100%;
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .section-title {
+        font-size: clamp(1.5rem, 5vw, 1.8rem);
+    }
+    
+    table th,
+    table td {
+        padding: 12px 15px;
+        font-size: 0.9375rem;
+    }
+    
+    .tip-card,
+    .workflow-card,
+    .alias-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 16px;
+    }
+    
+    .container {
+        padding: 30px 15px 60px;
+    }
+    
+    .header {
+        padding: 10px 15px;
+        top: 0;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .header-left {
+        display: none !important;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .header-logo-only {
+        display: flex !important;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .header.scrolled .header-left {
+        display: flex !important;
+        justify-content: flex-start;
+    }
+    
+    .header.scrolled .header-logo-only {
+        display: none !important;
+    }
+    
+    .header-right {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+    }
+    
+    .header-tabs {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    
+    .tab-btn {
+        font-size: 0.8125rem;
+        padding: 6px 14px;
+        white-space: nowrap;
+    }
+    
+    .header-search {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .section {
+        margin-bottom: 50px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .section-icon-wrapper {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    table {
+        font-size: 0.875rem;
+    }
+    
+    table th,
+    table td {
+        padding: 10px 12px;
+    }
+    
+    .command {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+    }
+    
+    .tip-card,
+    .workflow-card,
+    .alias-card {
+        padding: 16px;
+    }
+    
+    .tip-title {
+        font-size: 1rem;
+    }
+    
+    .tip-text {
+        font-size: 0.9375rem;
+    }
+    
+    .workflow-cards,
+    .aliases-grid,
+    .tips-container,
+    .stash-quick-grid {
+        grid-template-columns: 1fr;
+    }
+}
