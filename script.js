@@ -289,13 +289,12 @@ function initHeaderScroll() {
     if (!header) return;
 
     let ticking = false;
-    let lastScrollY = 0;
 
     function updateHeader() {
         const scrollY = window.scrollY || document.documentElement.scrollTop;
         
-        // Add scrolled class after scrolling down 100px
-        if (scrollY > 100) {
+        // Add scrolled class after scrolling down 50px (less delay)
+        if (scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
@@ -363,6 +362,10 @@ function initSearch() {
                 document.querySelectorAll('.section').forEach(section => {
                     section.style.display = '';
                     section.style.opacity = '1';
+                    // Reset all rows and cards
+                    section.querySelectorAll('tr, .tip-card, .workflow-card, .alias-card').forEach(el => {
+                        el.style.display = '';
+                    });
                 });
                 document.querySelectorAll('.tab-btn').forEach(btn => {
                     btn.classList.toggle('active', btn.dataset.tab === 'all');
@@ -377,35 +380,24 @@ function initSearch() {
 
             // Search through commands and descriptions
             document.querySelectorAll('.section').forEach(section => {
-                const commands = section.querySelectorAll('.command');
-                const tableRows = section.querySelectorAll('tr');
                 let hasMatch = false;
 
-                tableRows.forEach(row => {
-                    const text = row.textContent.toLowerCase();
+                // Check all searchable elements
+                const searchableElements = section.querySelectorAll('tr, .tip-card, .workflow-card, .alias-card, .stash-quick-item');
+                
+                searchableElements.forEach(el => {
+                    const text = el.textContent.toLowerCase();
                     if (text.includes(query)) {
-                        row.style.display = '';
+                        el.style.display = '';
                         hasMatch = true;
                     } else {
-                        row.style.display = 'none';
-                    }
-                });
-
-                // Also check tip cards and other content
-                const tipCards = section.querySelectorAll('.tip-card, .workflow-card, .alias-card');
-                tipCards.forEach(card => {
-                    const text = card.textContent.toLowerCase();
-                    if (text.includes(query)) {
-                        card.style.display = '';
-                        hasMatch = true;
-                    } else {
-                        card.style.display = 'none';
+                        el.style.display = 'none';
                     }
                 });
 
                 // Show/hide section based on matches
                 section.style.display = hasMatch ? '' : 'none';
-                section.style.opacity = hasMatch ? '1' : '0.5';
+                section.style.opacity = '1';
             });
         }, 200);
     });
